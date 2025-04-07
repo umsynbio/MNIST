@@ -15,8 +15,8 @@ test_dataset = datasets.MNIST(
 
 
 train_loader = DataLoader(
-    train_dataset, batch_size=get_config["batch_size"], shuffle=True
+    train_dataset, batch_size=get_config()["batch_size"], shuffle=True
 )
 test_loader = DataLoader(
-    test_dataset, batch_size=get_config["batch_size"], shuffle=True
+    test_dataset, batch_size=get_config()["batch_size"], shuffle=True
 )
