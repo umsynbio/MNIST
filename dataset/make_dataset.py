@@ -2,10 +2,7 @@ from torchvision import datasets, transforms
 
 from torch.utils.data import DataLoader
 
-
-batch_size = 64
-learning_rate = 0.001
-epochs = 30
+from config.config import get_config
 
 transform = transforms.ToTensor()
 
@@ -17,5 +14,9 @@ test_dataset = datasets.MNIST(
 )
 
 
-train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
-test_loader = DataLoader(test_dataset, batch_size=batch_size)
+train_loader = DataLoader(
+    train_dataset, batch_size=get_config["batch_size"], shuffle=True
+)
+test_loader = DataLoader(
+    test_dataset, batch_size=get_config["batch_size"], shuffle=True
+)

@@ -211,3 +211,5 @@ venv/*
 data/*
 
 *.pth
+
+artifacts/*

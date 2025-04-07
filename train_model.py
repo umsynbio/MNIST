@@ -9,6 +9,10 @@ from dataset.make_dataset import train_loader, test_loader
 
 from models.model import SimpleNN
 
+import os
+
+import datetime
+
 
 def main():
     config = get_config()
@@ -55,12 +59,16 @@ def main():
             }
         )
 
+    if not os.path.exists("artifacts"):
+        os.makedirs("artifacts")
 
-    torch.save(model.state_dict(), "model.pth")
+    timestamp = datetime.datetime.now().timestamp()
+    model_name = f"artifacts/model-{timestamp}.pth"
+
+    torch.save(model.state_dict(), model_name)
     artifact = wandb.Artifact("mnist-basic", type="model")
-    artifact.add_file("model.pth")
+    artifact.add_file(model_name)
     run.log_artifact(artifact)
-    
     run.finish()
 
 
