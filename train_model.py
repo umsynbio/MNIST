@@ -16,7 +16,8 @@ import datetime
 
 def main():
     config = get_config()
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    device = torch.device("cuda" if torch.cuda.is_available() else "mps" if torch.mps.is_available() else "cpu" )
+    print(f"Using device: {device}")
 
     model = SimpleNN().to(device)
     criterion = nn.CrossEntropyLoss()
@@ -33,6 +34,7 @@ def main():
             "dataset": "MNIST",
             "epochs": epochs,
         },
+        disabled=True,  # Set to True to disable logging
     )
 
     for epoch in range(epochs):
